@@ -1,0 +1,88 @@
+<h1>Richieste HTTP</h1>
+
+<p>
+    <code>express</code> ci fornisce diversi metodi per 
+    gestire le richieste HTTP, in particolare, se vogliamo gestire una
+    specifica richiesta come la richiesta <code>GET</code> o <code>PUT</code>,
+    si usa il metodo con lo stesso nome. 
+</p>
+
+<pre><code>const express = require('express');
+const app = express();
+const port = 3000;
+
+app.listen(port, () => {
+    console.log(`Server on http://localhost:${port}`);
+});
+
+app.get("/", (req, res) => {
+    res.send("Hello express");
+})</code></pre>
+
+<p>
+    Ogni metodo che gestisce le richieste HTTP vengono chiamati 
+    <code>middleware</code>, essi hanno 2 parametri obbligatorie,
+    il primo è url dove middleware gestisce le richieste(es. "/", "/home", "/home/contatti")
+    e il secondo è un callback con due parametri res e req che indicano rispettivamente
+    le informazione che il client manda al server e l'informazione che server
+    restituisce al client.
+</p>
+<p>
+    Tale funzione viene richiamato dall'<code>express</code> ogni volta che riceve 
+    una richiesta HTTP di tipo indicato.
+</p>
+<p>
+    Inoltre esiste il terzo parametro <code>next</code> che richiama 
+    il callback definita per lo stesso url e stesso metodo HTTP.
+</p>
+
+<pre><code>const express = require('express');
+const app = express();
+const port = 3000;
+
+app.listen(port, () => {
+    console.log(`Server on http://localhost:${port}`);
+});
+
+app.get("/", (req, res, next) => {
+    res.send("Hello");
+    next();
+})
+
+app.get("/", (req, res) => {
+    res.send("express");
+})</code></pre>
+
+<p>
+    Se invece non usiamo il parametro <code>next</code>,
+    il secondo callback non verrà richiamato.
+</p>
+
+<h2>Parametri passati per <code>POST</code></h2>
+
+<p>
+    Per ricavare i parametri passati per <code>POST</code>
+    si deve utilizzare il modulo fornito dall'<code>express</code>,
+    <code>express.json()</code>.
+</p>
+
+<pre><code>const express = require('express');
+const app = express();
+const port = 3000;
+
+// configurazione per usare il modulo express.json
+app.use(express.json());
+app.use(express.urlencoded({extended: true}));
+
+app.listen(port, () => {
+    console.log(`Server on http://localhost:${port}`);
+});
+
+app.post("/", (req, res) => {
+    res.send(req.body.[paramName]);
+})</code></pre>
+
+<p>
+    Usando questo modulo, possiamo ricavare i parametri passati per 
+    <code>POST</code> usando il metodo del punto, <code>req.body.[nome del parametro]</code>.
+</p>

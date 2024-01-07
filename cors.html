@@ -1,0 +1,52 @@
+<h1><code>CORS</code></h1>
+
+<p>
+    Il termine "CORS" sta per "Cross-Origin Resource Sharing" 
+    ed è una politica di sicurezza implementata nei browser web 
+    per controllare come le risorse di una pagina web possono 
+    essere richieste da un dominio diverso da quello della pagina 
+    stessa.
+</p>
+
+<p>
+    Quando una pagina web fa una richiesta HTTP da un dominio A 
+    a un dominio B (ad esempio, quando una pagina web su 
+    <code>http://dominioA.com</code> fa una richiesta a <code>http://dominioB.com</code> 
+    tramite JavaScript), la politica di sicurezza del browser 
+    può bloccare la richiesta, a meno che il server al dominio B 
+    non fornisca le autorizzazioni appropriate.
+</p>
+
+<p>
+    Il problema principale che CORS cerca di risolvere è la 
+    potenziale minaccia di sicurezza quando si consente a 
+    pagine web di eseguire richieste da un dominio diverso. 
+    Questa politica impedisce richieste non autorizzate e 
+    protegge gli utenti da potenziali attacchi.
+</p>
+
+<h2>Gestire <code>CORS</code></h2>
+
+<p>
+    Nell'<code>express</code>, per gestire CORS si usa
+    il modulo <code>cors()</code>.
+</p>
+
+<p>
+    Dato che questo modulo non è fornito dall'<code>express</code>
+    , dobbiamo installarlo attraverso <code>npm install</code>.
+</p>
+
+<pre><code>npm install cors</code></pre>
+
+<pre><code>const express = require('express');
+const app = express();
+const port = 3000;
+
+// Usare il modulo cors()
+app.use(cors());
+app.options("*", cors());
+
+app.listen(port, () => {
+    console.log(`Server on http://localhost:${port}`);
+});</code></pre>

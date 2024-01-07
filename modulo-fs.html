@@ -1,0 +1,25 @@
+<h1><code>fs</code></h1>
+
+<p>
+    Uno dei moduli più usati in Node.js è il modulo <code>fs</code>,
+    che sta ad indicare filesystem, infatti, esso fornisce diversi 
+    funzioni e classi che ci permette svolgere operazione relativo
+    al filesystem del server.
+</p>
+<p>
+    Le funzioni più usati sono queli per leggere e scrivere i file; essi si dividono in 
+    due tipi, asincrono e sincrono, il primo tipo non blocca esecuzione del 
+    codice per leggere o scrivere il file, le funzioni fornite dal modulo
+    <code>fs</code> per leggere il file in modo asincrono è <code>readFile()</code>
+    e per scrivere nel file in modo asincrono è <code>writeFile()</code>.
+</p>
+<p>
+    Mentre le funzione sincrono per lettura e scrittura del file bloccano
+    l'esecuzione del codice fino al completamento dell'esecuzione del funzione
+    , essi sono <code>readFileSync()</code> e <code>writeFileSync()</code>.
+</p>
+
+<pre><code class="language-javascript">import fs from "fs"
+    
+writeFileSync("test.txt", "hello world");
+let content = readFileSync("test.txt");</code></pre>

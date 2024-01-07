@@ -1,0 +1,118 @@
+<h1>Service HTTP</h1>
+<p>
+    I service HTTP sono degli interfaccie basata sul protocollo HTTP,
+    esso permette lo scambio dei dati tra il client e il server.
+    I dati trasmessi possono essere sia delle pagine web, ma anche dell'informazione
+</p>
+<p>
+    In quest'ultimo caso si parla de service <code>RESTful</code> 
+    (Representational State Transfer) e di solito i formati di 
+    scambi dati sono <code>JSON</code> e <code>XML</code>.I dati trasmessi possono essere sia delle pagine web, ma anche dell'informazione
+    estratte da una <code>data source</code> come un data base server.
+</p>
+
+<h2>Service HTTP in Node.js</h2>
+<p>
+    Il Node.js ci fornisce nativamente dei <code>moduli</code> 
+    che ci facilita il programazione dei service HTTP, tra cui il moduloo <code>http</code>
+    e il modulo <code>fs</code>.
+</p>
+<p>
+    In particolare, per creare un service HTTP che sta ad ascoltare
+    le richieste dei client in una determinata porta, si deve invocare
+    il funzione <code>createServer()</code> del modulo <code>http</code>.
+</p>
+<pre><code class="language-javascript">import http from "http";
+
+let server = http.createServer((req, res) => {
+    ...
+});
+
+server.listen(3000);</code></pre>
+<p>
+    Questa funzione ha bisogno di un funzione callback, che verrà invocato
+    ogni volta che un client manda una richiesta al server e ha bisogno di 
+    due parametri, <code>res</code> e <code>req</code>, il primo argomento 
+    contiene tutte le informazione che client ha mandato al server attraverso
+    le richieste http; mentre il secondo conterrà tutti i dati che il server
+    restituirà al client, che tratteremo meglio nel sezione seguente.
+</p>
+<p>
+    Il funzione <code>createServer()</code> ci restituisce un oggetto di classe
+    <code>http.Server</code>, che contiene il metodo <code>listen()</code>, esso
+    ha bisogno del numero di porta in cui il server ascolterà le rischieste http dei 
+    client.
+</p>
+
+<h2><code>ServerResponse</code></h2>
+<p>
+    Il parametro <code>res</code> del callback passato alla funzione 
+    <code>createServer()</code> è una instanza della classe <code>ServerResponse</code>
+    esso permette al server di mandare l'informazione al client.
+</p>
+
+<p>
+    Per restituire dei testi al client si usano i metodi <code>write()</code>
+    e <code>end()</code> dell'argomento <code>res</code>, questi due metodi
+    si differenziano tra loro per il loro meccanismo di bufferizzazione, infatti
+    il primo metodo bufferizza tutte le informazione senza mandare al client; mentre
+    il secondo svuota il buffer mandando al client tutte le informzione precedentemente
+    inseritto dal metodo <code>write()</code> e le informazione aggiuntive del metodo <code>end()</code>.
+</p>
+<p>
+    In particolare, se viene invocato il metodo <code>end()</code> il server
+    non potrà mandare più ulteriori informazione al client.
+</p>
+
+<pre><code class="language-javascript">import http from "http";
+
+let server = http.createServer((req, res) => {
+    res.write("hello");
+    res.end(" world");
+});
+
+server.listen(3000);</code></pre>
+
+<p>
+    In questo modo, però, le informazione mandato al client è puramente
+    testo, quindi, se vogliamo mandare dei tag html, il client non gli
+    interpreta, e lo mostra così com'è.
+</p>
+
+<pre><code class="language-javascript">import http from "http";
+
+let server = http.createServer((req, res) => {
+    res.end("&LeftAngleBracket;strong&RightAngleBracket;Hello world&LeftAngleBracket;/strong&RightAngleBracket;");
+});
+
+server.listen(3000);</code></pre>
+
+<p>
+    Quindi dobbiamo indicare che il nostro messaggio non è un semplice testo
+    ma sono dei codice html, per fare ciò, si usa il metodo <code>setHeader()</code>
+    del classe <code>Server</code>.
+</p>
+<p>
+    In particolare, indichiamo che il <code>ContentType</code> del contenuto
+    non sarà <code>text/plain</code>, ma <code>text/html</code>.
+</p>
+
+<pre><code class="language-javascript">import http from "http";
+
+let server = http.createServer((req, res) => {
+    res.setHeader("ContentType", "text/html")
+    res.end("&LeftAngleBracket;strong&RightAngleBracket;Hello world&LeftAngleBracket;/strong&RightAngleBracket;");
+});
+
+server.listen(3000);</code></pre>
+
+<a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers">Elenco degli header possibili</a>
+
+<h2>Avviare il servizio</h2>
+
+<p>
+    Infine, per avviare il server si deve utilizzare il commando <code>node</code>
+    seguito dal percorse del file di Javascript. 
+</p>
+
+<pre><code>node [file].js</code></pre>

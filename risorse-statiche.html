@@ -1,0 +1,26 @@
+<h1>Risorse statiche</h1>
+
+<p>
+    Le risorse statiche come immagini, fogli d
+    stili o pagine web statiche, devono essere
+    cofigurate per essere usate in modo corretto
+    all'interno delle pargine dinamiche generato 
+    dall'<code>express</code>.
+</p>
+
+<h2>Configurazione</h2>
+
+<pre><code>const express = require('express');
+const app = express();
+const port = 3000;
+
+//per mappare su /
+app.use(express.static("/static"));
+
+//per mappare su un alias
+app.use("/alias", express.static("/static"));</code></pre>
+
+<p>
+    Possiamo configurare le nostre risorse statiche ad essere 
+    mappato al root ("/"), o ad un alias 
+</p>

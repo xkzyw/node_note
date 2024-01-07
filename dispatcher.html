@@ -1,0 +1,74 @@
+<h1>Dispatcher</h1>
+<p>
+    Un <code>dispatcher</code> è un componente o un concetto che 
+    gestisce la direzione delle richieste URL all'interno di 
+    un'applicazione web.
+</p>
+<p>
+    La sua funzione principale è interpretare l'URL richiesto e 
+    instradare la richiesta verso il destinatario appropriato o 
+    il gestore di risorse nell'applicazione.
+</p>
+<p>
+    Il dispatcher URL svolge un ruolo cruciale nell'indirizzare 
+    dinamicamente le richieste degli utenti ai componenti o alle 
+    azioni pertinenti. Questo meccanismo può essere implementato per 
+    determinare quale risorsa o quale azione dell'applicazione deve 
+    rispondere a una specifica richiesta URL.
+</p>
+<p>
+    Infatti, con l'utilizzo del dispatcher possiamo dividere il nostro codice in base
+    all'URL richiesto, per esempio possimo creare un funzione <code>richiedePrenotazione()</code>
+    che verrà invocato quando viene richiesto <code>http://[ip]:[port]/richedePrenotazione</code>.
+</p>
+<p>
+    In sostanza, il dispatcher URL facilita la gestione delle 
+    richieste degli utenti all'interno di un'applicazione web, 
+    contribuendo a creare una struttura organizzata per la 
+    gestione delle risorse e delle interazioni utente. 
+    La sua implementazione può variare in base all'architettura 
+    dell'applicazione e al framework utilizzato.
+</p>
+
+
+<h2>Implementazione di un dispacher attraverso il modulo <code>url</code></h2>
+
+<pre><code class="language-javascript">import http from "http";
+import url from "url";
+
+let server = http.createServer((req, res) => {
+    let urlContent = url.parse(req.url, true);
+
+    let path = urlContent.pathname;
+
+    switch(path){
+        case "/":
+            res.end("root");
+            break;
+        case "/richiedePrenotazione":
+            res.end("richiede prenotazione");
+            break;
+    }
+
+});
+
+server.listen(3000);</code></pre>
+
+<p>
+    In questo esempio di codice abbiamo importato il modulo <code>url</code> per manovrare
+    l'indirizzo richiesto dal client, che è contenuto all'interno del parametro <code>req</code>.
+</p>
+
+<p>
+    Infatti, utilizzando la funzione <code>parse()</code> del modulo <code>url</code> possiamo ricavare
+    il <code>pathname</code> presente nell'url subito dopo il <code>/</code>.
+</p>
+<p>
+    tale funzione ha bisogno di due parametri, il primo è la stringa di URL da parsare, mentre il secondo è
+    un valore booleano che indica se parsare i parametri passati per <code>GET</code> in object literal o non.
+</p>
+
+<p>
+    Infine, implementiamo il nostro dispatcher con un istruzione di selezione, in questo caso abbiamo scelto
+    di utilizzare lo <code>switch</code>, ma è inddiferente dall'<code>if</code>.
+</p>

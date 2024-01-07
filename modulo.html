@@ -1,0 +1,136 @@
+<h1>Modulo</h1>
+
+<p>
+    In Node.js, il termine <code>modulo</code> si riferisce a un file JavaScript 
+    autonomo o a una raccolta di file che esportano funzionalità o 
+    oggetti riutilizzabili. 
+</p>
+<p>
+    L'obiettivo principale dei moduli in 
+    Node.js è organizzare il codice in unità logiche e riutilizzabili, 
+    facilitando la manutenzione, la condivisione e la gestione delle 
+    dipendenze del codice.
+</p>
+
+<p>
+    Attualmente è presente due standard per definire i moduli in JavaScript
+    , <code>ES Module</code> e <code>CommonJS</code>. Se segli di usare uno 
+    non potrai usare l'altro.
+</p>
+
+<h2>ES Module</h2>
+<p>
+    Lo standard <code>ES Module</code> usa i keyword <code>import</code>
+     e <code>from</code> per importare modulo.
+</p>
+
+<pre><code class="language-javascript">import http from "http";</code></pre>
+
+<p>
+    Questa istruzione importa il modulo http e lo salva nel variabile <code>http</code>,
+    ora possiamo utilizzare tutte le funzione o classi fornito dal modulo <code>http</code>.
+</p>
+<p>
+    L'importazione del modulo in questo standard è permesso solo all'inizio
+    del file e l'importazione avviene in modo asincrono, quindi, non viene
+    importato l'intero modulo al momento della dichiarazione.
+</p>
+<p>
+    Inoltre, si può segliere cosa importare anzichè importare tutto il modulo
+    , infatti, usando la destruzione, si può importare una parte di esso.
+</p>
+
+<pre><code class="language-javascript">import { createServer } from "http";</code></pre>
+
+<h3>Creare un modulo usando ES Module</h3>
+
+<ol>
+    <li>    
+        <strong>Creare il file <code>package.json</code></strong>
+        <p>
+            Si può generare il file <code>package.json</code> attraverso
+            il commando fornito dal npm.
+        </p>
+        <pre><code>npm init</code></pre>
+    </li>
+    <li>
+        <strong>Modificare il file <code>package.json</code></strong>
+        <p>
+            Aggiungere il chiave <code>type</code> con valore <code>module</code>.
+            <pre><code class="language-javascript">{
+    "name": "node_note",
+    "version": "0.1.0",
+    "type": "module"
+}</code></pre>
+        </p>
+    </li>
+    <li>
+        <strong><code>export default</code></strong>
+        <p>
+            Ora si può usare il keyword <code>export default</code> su tutte le file
+            Javascript relativo al file <code>package.json</code> per esporre
+            funzioni, classi e costanti al mondo esterno.
+        </p>
+        <pre><code class="language-javascript">function sum(a, b){
+    return a+b;
+}
+
+export default sum;</code></pre>
+        <p>
+            Se vogliamo esportare più di una funzione, classe o costanti,
+            possiamo usare l'object literal.
+        </p>
+        <pre><code class="language-javascript">function sum(a, b){
+    return a+b;
+}
+
+function diff(a, b){
+    return a-b;
+}
+
+export default { sum, diff };</code></pre>
+    </li>
+</ol>
+
+<h2>CommonJS</h2>
+
+<p>
+    Lo standard <code>CommonJS</code> usa il keyword <code>require</code>
+    per importare modulo.
+</p>
+
+<pre><code class="language-javascript">const http = require("http")</code></pre>
+
+<p>
+    In questa sezione di codice abbiamo importato tutto il modulo nel variabile
+    <code>http</code>, attraverso questa dichiarazione tutto il modulo verrà
+    importato.
+</p>
+
+<p>
+    L'importazione avviene in modo sincrono, ciò significa l'esecuzione del
+    codice viene bloccato fino quando ha finito di importare.
+</p>
+<p>
+    L'istruzione precedente si può usare in qualsiasi parte del file Javascript.
+</p>
+
+<h2>
+    Creare modulo usando CommonJS
+</h2>
+
+<ol>
+    <li>
+        <strong><code>module.export</code></strong>
+        <p>
+            Si deve assegnare all'attributo del oggetto <code>module</code>
+            <code>export</code> un object literal di tutte le classi o funzioni
+            da esportare al di fuori del file.
+        </p>
+        <pre><code class="language-javascript">module.exports = {
+    fun1,
+    fun2,
+    ...            
+}</code></pre>
+    </li>
+</ol>

@@ -1,0 +1,88 @@
+<h1>Template engine</h1>
+
+<p>
+    Un <code>template engine</code> è un motore software progettato per generare pagine web 
+    dinamiche, combinando modelli di markup con dati provenienti da 
+    un'applicazione o un server. 
+</p>
+<p>
+    I template engine semplificano la creazione di HTML dinamico, consentendo 
+    agli sviluppatori di separare la logica di presentazione dalla logica di 
+    business.
+</p>
+<p>
+    L'obiettivo principale di un template engine è consentire agli 
+    sviluppatori di definire modelli di pagina che includono segnaposto o 
+    variabili, i quali vengono poi popolati con dati dinamici quando la 
+    pagina viene generata e inviata al browser del cliente.
+</p>
+
+<h2><code>ejs</code></h2>
+<p>
+    Uno dei template engine più usati è l'<code>ejs</code> che non è nativo
+    di <code>express</code>, quindi dobbiamo installarlo attraverso il commando
+    <code>npm install</code>.
+</p>
+
+<pre><code>npm install ejs</code></pre>
+
+<p>
+    Per usarlo nel nostro codice <code>express</code> si deve prima configurarlo:
+</p>
+
+<pre><code>const express = require('express');
+const app = express();
+const port = 3000;
+
+//configurazione template engine
+
+// Indica che tutte le pagine da processare si trova
+// nel path relativo di '/views'
+app.set("views", "/views");
+
+// Indica quale engine usare
+app.set("view engine", "ejs");
+
+app.listen(port, () => {
+    console.log(`Server on http://localhost:${port}`);
+});</code></pre>
+
+<p>
+    Ora, nel codice possiamo indicare che dobbiamo trasmettere
+    una pagina <code>.ejs</code> che all'interno contiene codice <code>HTML</code>
+    e degli speciali codice <code>ejs</code> che interpreta i variabili ricevuti 
+    dal server.
+</p>
+
+<pre><code>const express = require('express');
+const app = express();
+const port = 3000;
+
+//configurazione template engine
+
+// Indica che tutte le pagine da processare si trova
+// nel path relativo di '/views'
+app.set("views", "/views");
+
+// Indica quale engine usare
+app.set("view engine", "ejs");
+
+app.listen(port, () => {
+    console.log(`Server on http://localhost:${port}`);
+});
+
+app.get("/", (req, res) => {
+    res.render("home", {name: "Mario"});
+})</code></pre>
+
+<p>
+    In questo codice abbiamo usato <code>res.render()</code> al posto di <code>res.send()</code>
+    perchè indichiamo che vorriamo ritornare al client un pagina ejs dove, viene
+    passato al template engine un object literal con un attributo <code>name</code>. 
+</p>
+
+<p>
+    All'interno del pagina <code>ejs</code> possiamo usare
+    il segnaposto <code><%=[variabile]%></code> per usare
+    i variabili passate dal server.
+</p>

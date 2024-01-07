@@ -1,0 +1,83 @@
+<h1>
+    Installazione
+</h1>
+
+<h2>Linux</h2>
+<p>
+    Le distribuzioni Linux hanno differente <code>package manager system</code>,
+    quindi si deve cercare il commando giusto in base alla proria distribuzione.
+</p>
+<p>
+    Ecco l'installazione sui distribuzioni più noti:
+</p>
+
+<h4>Arch Linux based</h4>
+
+<ol>
+    <li>
+        <p>Aggiornare il gestore del pacchetto</p>
+        <pre><code class="language-shell">sudo pacman -Syy</code></pre>
+    </li>
+    <li>
+        <p>Installare <code>nodejs</code> e <code>npm</code></p>
+        <pre><code class="language-shell">sudo pacman -S nodejs npm</code></pre>
+    </li>
+    <li>
+        <p>Verificare l'installazione di <code>nodejs</code> e <code>npm</code></p>
+        <pre><code class="language-shell">node -v
+...
+npm -v
+...</code></pre>
+    </li>
+</ol>
+
+<h4>Debian Linux based</h4>
+
+<ol>
+    <li>
+        <p>Aggiornare il gestore del pacchetto</p>
+        <pre><code class="language-shell">sudo apt update</code></pre>
+    </li>
+    <li>
+        <p>Installare <code>nodejs</code> e <code>npm</code></p>
+        <pre><code class="language-shell">sudo apt install nodejs npm</code></pre>
+    </li>
+    <li>
+        <p>Verificare l'installazione di <code>nodejs</code> e <code>npm</code></p>
+        <pre><code class="language-shell">node -v
+...
+npm -v
+...</code></pre>
+    </li>
+</ol>
+
+<h2>Windows</h2>
+
+<ol>
+    <li>
+        <p><strong>Scaricare <code>Node.js</code></strong></p>
+        <p>Scarica l'installer dal <a href="https://nodejs.org/">sito ufficiale dei nodejs</a>.</p>
+    </li>
+    <li>
+        <p><strong>Eseguire l'installer</strong></p>
+        <p>Dopo il download, esegui l'installer e segui le istruzioni guidate.
+        Di solito, le impostazioni predefinite sono appropriate per la 
+        maggior parte degli utenti.</p>
+    </li>
+    <li>
+        <p><strong>Verificare l'installazione</strong></p>
+        <p>
+            Dopo l'installazione, apri il Prompt dei Comandi o 
+            PowerShell e esegui i seguenti comandi per verificare 
+            che <code>Node.js</code> e <code>npm</code> 
+            (Node Package Manager) siano stati 
+            installati correttamente:
+        </p>
+        <pre><code class="language-shell">node -v
+...
+npm -v
+...</code></pre>
+                </li>
+            </ol>
+    </li>
+</ol>

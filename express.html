@@ -1,0 +1,51 @@
+<h1><code>express</code></h1>
+
+<p>
+    Express.js è un framework web per Node.js che semplifica lo
+     sviluppo di applicazioni web fornendo un set di funzionalità 
+     robuste per la gestione delle route, delle richieste HTTP e 
+     delle risposte. 
+</p>
+
+<p>
+    Express.js è ampiamente utilizzato per la creazione di 
+    applicazioni web e API server-side in Node.js a causa della sua 
+    semplicità e flessibilità.
+</p>
+
+<h2>Installazione</h2>
+
+<p>
+    Si deve utilizzare il commando <code>npm install</code> per installare <code>express</code>
+</p>
+<pre><code>npm install express</code></pre>
+
+<h2>Inizializzazione</h2>
+
+<p>
+    Si deve prima inizializzare <code>express</code> prima di utilizzarlo.
+</p>
+
+<pre><code>const express = require('express');
+const app = express();
+const port = 3000;
+
+app.listen(port, () => {
+    console.log(`Server on http://localhost:${port}`);
+});</code></pre>
+
+<p>
+    Durante l'inizializzazione viene creato una istanza del classe
+    <code>Express</code>, il quale contiene il metodo <code>listen()</code>
+    che ha bisogno di due parametri, la porta dove ascoltare le richieste
+    del client e un callback richiamato nel momento che il server è in ascolto.
+</p>
+
+<h2>Avviamento</h2>
+
+<p>
+    Infine, per avviare il server si deve utilizzare il commando <code>node</code>
+    seguito dal percorse del file di Javascript. 
+</p>
+
+<pre><code>node [file].js</code></pre>
